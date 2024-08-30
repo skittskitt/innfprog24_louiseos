@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="melding"></p>
+    //script mangler >
+    <script>
+        //Vi har hentet brukerinformasjon, og lagret navnet til brukeren i en variabel kalt user_name
+        //navnet mangket to"
+        const user_name = "Lou"
+        //Vi har hentet fødselsåret til brukeren og lagret det i variabelen user_birthyear
+        //const er skrevet feil. Med alder bør det endres fra const til let?
+        const user_birthyear = 1998
+        //Vi regner ut alder ved å ta året vi er i minus fødselsår, og lagrer svaret i en ny variabel kalt age
+        //Manglet mellomrom mellom user=birthyear.
+        const age = 2024 - user = birthyear
+        //Så lager vi en tekst for utskrift ved hjelp av konkatinering
+        const utskrift = "Hei " user_name + " (" + age + "år)";
+        //...og skriver den ut til elementet med id melding
+        document.getElementById("melding").innerHTML = utskrift;
+    </script>
+</body>
+</html>
