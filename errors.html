@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="melding"></p>
+    <script>
+        //1.script manglet > 
+        //2.Marius manglet " på slutten
+        const user_name = "Marius"
+        //3.const er skrevet feil
+        const user_birthyear = 1983
+        //4.Det skal være _ i stedet for =
+        const age = 2022 - user_birthyear
+        //5.Det skal være + mellom "hei" of user_name
+        const utskrift = "Hei " + user_name + " (" + age + "år)";
+        document.getElementById("melding").innerHTML = utskrift;
+    </script>
+</body>
+</html>
