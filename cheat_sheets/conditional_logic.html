@@ -8,15 +8,46 @@
 <body>
     <h2>Er du gammel nok til å kjøre bil?</h2>
     <p id="carmessage"></p>
+    <h2>Kan spilleren åpne døren?</h2>
+    <p id="doormessage">Velg dør for å sjekke</p>
+    <h2>Kan jeg pensjonere meg?</h2>
+    <p id="retired"></p>
+
     <script> //If-test for å skjekke om vi er gammel nok.
         const age = 25
         const passed = true
+
         if(age >= 18 && passed) {
             //Vi tar bort === true for å fortkorte, med boolean går dette.
-                document.getElementById("carmessage").innerHTML ="Ja" //hente <p> meldingen
+            document.getElementById("carmessage").innerHTML ="Ja" //hente <p> meldingen
             } else {
-                document.getElementById("carmessage").innerHTML ="Nei"
+            document.getElementById("carmessage").innerHTML ="Nei"
             }
+        //Vi skal sjekke om en dør er låst og om spilleren har en nøkkel.
+        const door1_locked = true
+        const door2_locked = false
+        const backpack = "" //Tar vi bort nøkkelen så blir det "Nei" på døren som er låst
+        let doormsg = document.getElementById("doormessage") //deklarer med let for at verdien kan endres.
+        console.log(doormsg) //Vi legger den i en variabel for forenkle
+
+            if(door2_locked === false) {
+                doormsg.innerHTML = "Ja"
+        }   else {
+            if(backpack === "key") {
+                doormessage.innerHTML = "Ja"
+            } else {
+                doormessage.innerHTML = "Nei"
+                }
+        }
+        //Sjekk av mulig pensjonsalder
+        if(age >= 62 && age < 67) {
+            document.getElementById("retire").innerHTML = "Du kan gå av med AFP"
+        } else if(age >= 67) {
+            document.getElementById("retire").innerHTML = "Du kan gå av med full pensjon"
+        } else { //else brukes for alle andre tilfeller.
+            document.getElementById("retire").innerHTML = `Du kan gå av med AFP om ${62 - age} X år, og full pensjon om ${67 - age} år.` //Vi sette inn ett mattestykke i teksten.
+            
+        }
     </script>
 </body>
 </html>
