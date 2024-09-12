@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyr-sortert</title>
+</head>
+<body>
+    <p id="utskrift"></p>
+    <script>
+       const dyr = ["katt", "hund", "hest", "ku", "sau", "gris", "kanin", "mus", "rev", "reinstyr"]
+
+    dyr.push("Høne", "Hane")
+    dyr.sort()
+    const antallDyr = dyr.length
+    const utskrift = `Antall dyr: ${antallDyr}.
+        ${dyr[0]}, ${dyr[1]}, ${dyr[2]}, ${dyr[3]}, ${dyr[4]}, ${dyr[5]}, ${dyr[6]}, 
+        ${dyr[7]}, ${dyr[8]}, ${dyr[9]}, ${dyr[10]}, ${dyr[11]}.`
+        
+    document.getElementById("utskrift").innerHTML = utskrift; 
+    </script>
+</body>
+</html>
