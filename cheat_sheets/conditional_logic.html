@@ -17,7 +17,7 @@
         const age = 25
         const passed = true
 
-        if(age >= 18 && passed) {
+        if(age >= 18 && passed) {   
             //Vi tar bort === true for å fortkorte, med boolean går dette.
             document.getElementById("carmessage").innerHTML ="Ja" //hente <p> meldingen
             } else {
@@ -28,7 +28,7 @@
         const door2_locked = false
         const backpack = "" //Tar vi bort nøkkelen så blir det "Nei" på døren som er låst
         let doormsg = document.getElementById("doormessage") //deklarer med let for at verdien kan endres.
-        console.log(doormsg) //Vi legger den i en variabel for forenkle
+        console.log(doormsg) //Vi legger den i en variabel for å forenkle
 
             if(door2_locked === false) {
                 doormsg.innerHTML = "Ja"

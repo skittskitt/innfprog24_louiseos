@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If-else 2</title>
+</head>
+<body>
+    <p id="message"></p>
+    <script>
+        const age ="25"
+        let utskrift = document.getElementById("message")
+
+        if(age < 18) {
+            document.getElementById("message").innerHTML = "Du er ikke myndig."
+        } else if(age >= 18 && age <= 62) {
+            document.getElementById("message").innerHTML = "Du er myndig og klar for studier eller arbeidslivet."
+        } else if (age > 62) {
+            document.getElementById("message").innerHTML = "Du er pensjonsklar!"
+        }
+    </script>
+</body>
+</html>

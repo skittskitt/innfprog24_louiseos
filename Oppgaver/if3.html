@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If-else 3</title>
+</head>
+<body>
+    <p id="messageGutt">Gutter: </p>
+    <p id="messageJente">Jenter: </p>
+    <script>
+        const barn1 ="gutt"
+        const barn2 ="jente"
+        const barn3 ="jente"
+        let antall_gutter = 0
+        let antall_jenter = 0
+
+        if(barn1 === "gutt") {
+        antall_gutter.innerHTML = + 1
+        } else { 
+        antall_jenter.innerHTML = + 1
+        }
+        if(barn2 === "gutt") {
+        antall_gutter.innerHTML = + 1
+        } else { 
+        antall_jenter.innerHTML = + 1
+        }
+        if(barn2 === "gutt") {
+        antall_gutter.innerHTML = + 1
+        } else { 
+        antall_jenter.innerHTML = + 1
+        }
+        const utskrift = antall_gutter + antall_jenter;
+        document.getElementById("messageGutt" + "messageJente").innerHTML = utskrift
+    </script>
+</body>
+</html>
