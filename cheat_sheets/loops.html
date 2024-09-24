@@ -8,9 +8,10 @@
 <body>
     <h1>Regn ut summen av alle tall mellom <span id="start">X</span> og <span id="stopp">Y</span></h1>
     <p id="utregning"></p>
-    <h1>Vis alle tall som er delelig på <span id="deltall">X</span> mellom <span id="delstopp">Y</span> og 
-    <span id="delstopp">Z</span></h1>
+    <h1>Vis alle heltall som er delelig på <span id="deltall">Z</span> mellom <span id="delstart">X</span> og 
+    <span id="delstopp">Y</span></h1>
     <p id="delresultater"></p>
+
     <script>
         /*
         For-løkke trenger tre parametere.
@@ -19,14 +20,14 @@
         3) utregning av teller
         ++ er som å si "teller = teller + 1"
         */
-       for(let teller = 1; teller <= 10; teller++) {
+        for(let teller = 1; teller <= 10; teller++) {
         console.log(teller)
        }
        //While-løkker - Så lenge/ i mens.
        //Kjører helt til en tilstand er møtt.
        //console.log + en whileteller vil skrive ut teksten + telleren. Når den treffer 15, stopper den å kjøre.
-       let whileteller = 3
-       while(whileteller < 15) {
+        let whileteller = 3
+        while(whileteller < 15) {
         console.log("Jeg kjører fortsatt: " + whileteller)
         whileteller++
        }
@@ -49,15 +50,16 @@
             document.getElementById("utregning").innerHTML += teller + " + "
             } 
         }
-    //Vis heltall som er delelige på Z
-    const z = 3
-    document.getElementById("delstart").innerHTML = x
-    document.getElementById("delstopp").innerHTML = y
-    document.getElementById("deltall").innerHTML = z
+        //Vis heltall som er delelige på Z
+        const z = 3
+        document.getElementById("delstart").innerHTML = x
+        document.getElementById("delstopp").innerHTML = y
+        document.getElementById("deltall").innerHTML = z
 
-    for(let teller = x; teller <= y; teller ++){
-        if(teller % z === 0)
-        document.getElementById("delresultater").innerHTML += teller + " , "    }
+        for(let teller = x; teller <= y; teller++) {
+            if(teller % z === 0) {
+            document.getElementById("delresultater").innerHTML += teller + ", "}
+    }
     </script>
 </body>
 </html>
