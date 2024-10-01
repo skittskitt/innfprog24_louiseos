@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alderskalkulator</title>
+</head>
+<body>
+    <h1>Regn ut din alder</h1>
+    <p id="ageSentence"></p>
+    <script>
+        //Hvis ikke alle variablene får en verdi, vil den ene verdien skrevet være det samme som resten.
+        function ageCalculator(birthyear = "1998", year = "2024") {
+            //Regne ut alder.
+            const age = year - birthyear
+            console.log(age)
+
+            let text = ""
+            if(year > 2024) {
+                text = `I ${year} vill du være ${age} år gammel.`
+            } else if (year < 2024) {
+                if(age < 0){ //Vi skriver Math.abs() for å fjerne - fra teksten.
+                    text = `I ${year} er det ${Math.abs(age)} til du blir født i ${birthyear}.`
+                    
+                } else {
+                    text = `I ${year} var du ${age} år gammel.`
+                }
+            } else {
+                text = `I år er du ${age} år gammel.`
+            }
+            document.getElementById("ageSentence").innerHTML = text
+        }
+        ageCalculator(1998, 2006)
+    </script>
+</body>
+</html>

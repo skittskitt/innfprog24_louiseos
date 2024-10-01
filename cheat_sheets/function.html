@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Functions</title>
+    <title>Functions cheat sheet</title>
 </head>
 <body>
+    <p>Louise Østensen. E-post: <span id="emailcontainer"></span></p>
     <script>
+        //Deklarere en funksjon
+        //En funksjon må kjøres for å kunne aktiveres
+        function myFirstFunction() {
+            console.log("Jeg kører min første funksjon :)")
+        }
+        //Kjøre/kalle funksjonen:
+        myFirstFunction()
+
+        //Deklarere en funksjon med en parameter.
+        function printName(name) {
+            console.log("Jeg heter " + name)
+        }
+        printName("Lou")
+
+        //Deklarerer en funsjon med en parameter som har en standard verdi.
+        /*Hvis der er to funksjoner med samme navn, vil koden kjøre funksjonen som ble skrevet sist.
+        På denne måten kan man ha en funsjon i reserve om den ene ikke ble kalt på.*/
+        function printDefaultName(name = "ingenting enda...") {
+            console.log("Jeg heter " + name)
+        }
+        printDefaultName()
+
+        //Lage en funksjon med eposr som link(template)
+        function createEmailLink(email) {
+            if(!email){
+                return "Ikke oppgitt."
+            }
+            return `<a href="mailto: ${email}">${email}<a/>`
+        }
+        console.log(createEmailLink("louiseos@hiof.no"))
+        document.getElementById("emailcontainer").innerHTML = createEmailLink("louiseos@hiof.no")
+    </script>
     </script>
 </body>
 </html> 
