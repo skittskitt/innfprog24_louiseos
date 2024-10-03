@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener keyboard</title>
+    <style>
+        body {
+            background: rgb(69, 53, 77);
+            padding: 3rem;
+        }
+        main{
+            background: #fff;
+            color: rgb(39, 39, 39);
+            width: 60rem;
+            margin: 0 auto;
+            min-height: 300px;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div id="text">Her kan jeg skrive...</div>
+    </main>
+    <script>
+        document.addEventListener("keydown", function(event) {
+            console.log(event)
+            if(event.key.length ===1){
+            document.getElementById("text").innerHTML += event.key
+            }
+        //Slette siste tegn:
+            if(event.key === "Backspace") {
+                const text = document.getElementById("text").innerHTML
+                console.log(text)
+                const newText = text.slice(0, text.length -1)
+                document.getElementById("text").innerHTML = newText
+            }
+        })
+    </script>
+</body>
+</html>

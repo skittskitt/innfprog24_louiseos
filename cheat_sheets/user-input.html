@@ -7,10 +7,22 @@
 </head>
 <body>
     <h1>Regn ut din alder</h1>
+    <p>
+        <label for="birthyear">Ditt fødselsår: </label>
+        <input id="birthyear" type="number" />
+    </p>
+    <p>
+        <label for="year">År for utregning:</label>
+        <input id="year" type="number"/>
+    </p>
+    <p><button onclick="ageCalculator()">Regn ut</button></p>
     <p id="ageSentence"></p>
     <script>
         //Hvis ikke alle variablene får en verdi, vil den ene verdien skrevet være det samme som resten.
-        function ageCalculator(birthyear = "1998", year = "2024") {
+        function ageCalculator() {
+            //Hente årstall fra innputs:
+            const birthyear = document.getElementById("birthyear").value
+            const year = document.getElementById("year").value
             //Regne ut alder.
             const age = year - birthyear
             console.log(age)
@@ -22,14 +34,13 @@
                 if(age < 0){ //Vi skriver Math.abs() for å fjerne - fra teksten.
                     text = `I ${year} er det ${Math.abs(age)} til du blir født i ${birthyear}.`  
                 } else {
-                    text = `I ${year} var du ${age} år gammel.`
+                    text = `I ${year} ble du ${age} år gammel.`
                 }
             } else {
                 text = `I år er du ${age} år gammel.`
             }
             document.getElementById("ageSentence").innerHTML = text
         }
-        ageCalculator(1998, 2006)
     </script>
 </body>
 </html>
