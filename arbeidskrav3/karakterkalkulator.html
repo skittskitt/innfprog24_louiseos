@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #kalkulator{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e4d6ef;
+        }
+    </style>
+</head>
+<body>
+    <div id="kalkulator">
+        <h1>Karakter-kalkulator</h1>
+        <form>
+            Poeng for eksamensoppgave 1:
+            <input type="number" id="poeng1" name="poeng1">
+            Poeng for eksamensoppgave 1:
+            <input type="number" id="poeng2" name="poeng2">
+            <input type="submit" value="Regn ut">
+        </form>
+        <p>Karakter:</p>
+    </div>
+    <script>
+        /* Formel for å regne ut karakter:
+        (0.3 * (PoengOppgave1 / MaksimaltPoengOppgave1 * 100)) +
+        (0.7 * (PoengOppgave2 / MaksimaltPoengOppgave2 * 100)) */
+        
+        const grades = [
+            {grade: "F", treshold: 0},
+            {grade: "E", treshold: 25},
+            {grade: "D", treshold: 44},
+            {grade: "C", treshold: 68},
+            {grade: "B", treshold: 88},
+            {grade: "A", treshold: 100} ]
+    </script>
+</body>
+</html>
