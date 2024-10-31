@@ -12,16 +12,21 @@
     </style>
 </head>
 <body>
+    <!--Jeg putter en <div> rundt html-koden for å manipulere den med CSS-->
     <div id="kalkulator">
         <h1>Karakter-kalkulator</h1>
-        <form>
+        <!--Jeg lager en <form> med input for hvor jeg skriver inn tallene som skal
+            tegner us, og en button som jeg ønsker skal regne ut mattestykket
+            
+            Første input har id="poeng1" som skal ta første nummeret vi legger inn,
+            andre input har id="poeng2" som skal ta andre nummeret vi gir.
+            Button med id="regnUt" hentes hver gang vi regner ut.-->
             Poeng for eksamensoppgave 1:
             <input type="number" id="poeng1" name="poeng1">
             Poeng for eksamensoppgave 1:
             <input type="number" id="poeng2" name="poeng2">
-            <input type="submit" value="Regn ut">
-        </form>
-        <p>Karakter:</p>
+            <button id="regnUt">Regn ut</button>
+        <p id="karakter"></p>
     </div>
     <script>
         /* Formel for å regne ut karakter:
@@ -35,6 +40,39 @@
             {grade: "C", treshold: 68},
             {grade: "B", treshold: 88},
             {grade: "A", treshold: 100} ]
+
+        /*Jeg lager en variabel for begge poengene som kan gis, også skriver jeg
+        document.getElementById og henter "poeng1"/"poeng2" med .value som henter ut verdien.
+        Disse variablene vil bli brukt i funksjonen for å regne ut mattestykket,
+        og hver gang vi kaller på variablene henter de nummerene som er skrevet i hver sine felt.*/
+        let poeng1 = document.getElementById("poeng1").value;
+        let poeng2 = document.getElementById("poeng2").value;
+
+        /*Jeg legger til en onclick på "regnUt" som ligger på knappen du trykker
+        for å regne ut karakteren. Jeg gir den også verdien kalkuler, som
+        er en funksjon som skal regne ut karakteren.
+        På denne måten skal den regne ut karakteren hver gang du trykker på knappen.*/
+        document.getElementById("regnUt").onclick = kalkuler;
+
+        /*Funksjon som skal regne ut karakter hver gang vi trykker "Regn ut"
+        Inni funksjonen lager jeg variabelen "regnUt" og gir verdien er matteformelen for
+        å regne ut karakteren.*/
+        function kalkuler() {
+            let utregning = 0.3 * (poeng1 / 100 * 100) + (poeng2 / 100 * 100);
+            if(utregning > 25) {
+                document.getElementById("karakter") = "Karakter: " + grades[0]; + ".";
+            } else if (utregning > 44) {
+                document.getElementById("karakter") = "Karakter: " + grades[1]; + ".";
+            } else if (utregning > 68) {
+                document.getElementById("karakter") = "Karakter: " + grades[2]; + ".";
+            } else if (utregning > 88) {
+                document.getElementById("karakter") = "Karakter: " + grades[3]; + ".";
+            } else if (utregning > 100) {
+                document.getElementById("karakter") = "Karakter: " + grades[4]; + ".";
+            } else if (utregning = 100) {
+                document.getElementById("karakter") = "Karakter: " + grades[5]; + ".";
+            }
+        }
     </script>
 </body>
 </html>
