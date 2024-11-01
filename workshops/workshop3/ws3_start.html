@@ -73,12 +73,19 @@
     </main>
     <canvas id="canvas"></canvas>
     <script>
+        //Canvas
+        const c = document.getElementById("canvas")
+        c.width = 800
+        c.height = 600
+        const ctx = c.getContext("2d")
         //Config
         const gameConfig = {
             player: "Marius",
             energy: 10,
             points: 50,
-            duration: 123
+            duration: 123,
+            gamePause: false,
+            gamePausedText: "Press P to pause"
         }
         //Notebook
         const notebook = {
@@ -87,35 +94,14 @@
             loops: 5,
             functions: 3
         }
+        //Array med spillelementtyper
+        const itemTypes = ["variable", "function", "loop", "array", "bug", "energydrink"]
 
-        //Canvas
-        const c = document.getElementById("canvas")
-        c.width = 800
-        c.height = 600
-        const ctx = c.getContext("2d")
-        //Bakgrunns boks
-        ctx.beginPath()
-        ctx.rect(610, 565, 600, 600)
-        ctx.fillStyle = "#ffffff";
-        ctx.fill()
-        ctx.closePath()
-        //"Press P to unpause"
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "#3c429b";
-        ctx.fillText("Press P to unpause", 620, 590)
-
-        //Helten
+        //"fortran" lager vi som et objekt.
         const fortran = {
-            speed: 3,
-            x: c.width / 2 - 20,
-            y: c.height / 2 - 40
-        }
-        //Tegn helten i canvas
-        const fortranImage = new Image()
-        fortranImage.src = "icons/fortran.png"
-        let fortranImageLoaded = false
-        fortranImage.onload = () => {
-            fortranImageLoaded = true
+            speed: 5,
+            x: c.width / 2,
+            y: c.height / 2
         }
 
         //Function for all prints
@@ -138,14 +124,14 @@
             document.getElementById("functions").innerHTML = notebook.functions
         }
 
-        //WS2, Oppgave 4: Funksjon for å skrive ut oppdatering til et element:
+        //Funksjon for å skrive ut oppdatering til et element:
         function updateSingleStaticUI(elementid, value) {
             document.getElementById(elementid).innerHTML = value
         }
 
         //Kjøre funksjonen for utskrift:
         updateStaticUI()
-        //WS2, Oppgave 4: Testkjøring av funksjon for å oppdatere ett element:
+        //Testkjøring av funksjon for å oppdatere ett element:
         updateSingleStaticUI("playerName", "TESTNAVN")
 
         //Lage funksjon for å vise/skjule elementer
@@ -162,7 +148,7 @@
             }
         }
 
-        //WS2, Oppg. 3: Lytte etter tastaturtrykk
+        //Lytte etter tastaturtrykk
         document.addEventListener("keydown", function(Event) {
             //Sjekke om tasten som er trykket er N:
             if(Event.key === "n") {
@@ -174,13 +160,63 @@
             }
         })
 
-        //WS2, Oppg. 2: Lytte etter klikk på notebook- og info-knappene:
+        //Lytte etter klikk på notebook- og info-knappene:
         document.getElementById("notebookToggler").addEventListener("click", function(Event) {
             toggleVisibility("notebook")
         })
         document.getElementById("infoToggler").addEventListener("click", function(Event) {
             toggleVisibility("info")
         })
+
+        //Tegn "fortran" i canvas
+        let fortranImageLoaded = false
+        let fortranImage = new Image()
+        fortranImage.src = "icons/fortran.png"
+        fortranImage.onload = () => { fortranImageLoaded = true; }
+
+        //drawItem(), elementer som dukker opp og forsvinner igjen.
+        function drawItem(type, x, y) {
+            let itemImage = new Image()
+            itemImage.src = `icons/${type}.svg`
+            itemImage.onload = () => { ctx.drawImage(itemImage, x, y) }
+        }
+        const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame
+        || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+
+        //Starte tegnemotoren
+        function drawElements() {
+            console.log("requestAnimationFrame kjører")
+            if(fortranImageLoaded === true) {
+                ctx.drawImage (fortranImage, fortran.x, fortran.y)
+            }
+            //Hva som skal skje hvis vi pauser spillet
+            if(gameConfig.gamePause === true) {
+                ctx.beginPath()
+                ctx.font = "100px Arial"
+                ctx.fillStyle = "red"
+                ctx.fillText("PAUSED", 250, 300)
+                ctx.closePath()
+                //Oppdatere pause-infotekst ved true
+                gameConfig.gamePausedText = "Press P to unpause"
+            } else {
+                gameConfig.gamedPasuedText = "Press P to pause"
+            }
+
+            drawItem("bug", 50, 100)
+            drawItem("energydrink", 400, 500)
+
+            //"Press P to pause"
+            ctx.beginPath()
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(650, 570, 200, 30)
+            ctx.fillStyle = "#3c429b"
+            ctx.font = "15px Arial"
+            ctx.fillText(gameConfig.gamePausedText, 660, 590)
+            ctx.closePath()
+
+            requestAnimationFrame(drawElements)
+        }
+        drawElements()
     </script>
 </body>
 </html>
