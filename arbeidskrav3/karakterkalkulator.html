@@ -1,78 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nb">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Karakter kalkulator</title>
     <style>
-        #kalkulator{
+        /*css kode for kalkulatoren*/
+        body { 
+            background: #b8edc1; 
+            display: flex;
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #e4d6ef;
+            font-size: 12px;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <!--Jeg putter en <div> rundt html-koden for å manipulere den med CSS-->
-    <div id="kalkulator">
-        <h1>Karakter-kalkulator</h1>
-        <!--Jeg lager en <form> med input for hvor jeg skriver inn tallene som skal
-            tegner us, og en button som jeg ønsker skal regne ut mattestykket
-            
-            Første input har id="poeng1" som skal ta første nummeret vi legger inn,
-            andre input har id="poeng2" som skal ta andre nummeret vi gir.
-            Button med id="regnUt" hentes hver gang vi regner ut.-->
-            Poeng for eksamensoppgave 1:
-            <input type="number" id="poeng1" name="poeng1">
-            Poeng for eksamensoppgave 1:
-            <input type="number" id="poeng2" name="poeng2">
-            <button id="regnUt">Regn ut</button>
-            <p id="karakter"></p>
-    </div>
+<!--Jeg setter opp to <input>-felt med type:text der du kan skrive inn poengene for hver av oppgavene.
+Jeg gir hver av disse sin egen id "poeng1" og "poeng2", slik at jeg kan hente nummeret/verdien som er skrevet inn i
+feltene senere.-->
+    Poeng for eksamensoppgave 1:
+    <input type="text" id="poeng1" name="poeng1">
+    Poeng for eksamensoppgave 2:
+    <input type="text" id="poeng2" name="poeng2">
+
+<!--Lager så en <button> knapp med id "regnUt". Denne id-en blir også hentet og brukt senere. Jeg legger også på en
+    disabled, slik at du ikke kan trykke på knappen. Denne skal bli deaktivert etter du har skrevet inn
+    svar i begge feltene.-->
+    <button id="regnUt" disabled>Beregn karakter</button>
+
+<!--Deretter setter jeg opp en <p>-tag med id "karakter" som er der karakteren skal bli skrevt ut synlig for 
+    brukeren.-->
+    <p id="karakter"></p>
+
     <script>
-        /* Formel for å regne ut karakter:
-        (0.3 * (PoengOppgave1 / MaksimaltPoengOppgave1 * 100)) +
-        (0.7 * (PoengOppgave2 / MaksimaltPoengOppgave2 * 100)) */
-        
+        /*Karakterskalaen:  */
         const grades = [
-            {grade: "F", treshold: 0},
-            {grade: "E", treshold: 25},
-            {grade: "D", treshold: 44},
-            {grade: "C", treshold: 68},
-            {grade: "B", treshold: 88},
-            {grade: "A", treshold: 100} ]
+            { grade: "F", treshold: 0 },
+            { grade: "E", treshold: 25 },
+            { grade: "D", treshold: 44 },
+            { grade: "C", treshold: 68 },
+            { grade: "B", treshold: 88 },
+            { grade: "A", treshold: 100 } ]
 
-        /*Jeg lager en variabel for begge poengene som kan gis, også skriver jeg
-        document.getElementById og henter "poeng1"/"poeng2" med .value som henter ut verdien.
-        Disse variablene vil bli brukt i funksjonen for å regne ut mattestykket,
-        og hver gang vi kaller på variablene henter de nummerene som er skrevet i hver sine felt.*/
-        let poeng1 = document.getElementById("poeng1").value;
-        let poeng2 = document.getElementById("poeng2").value;
-
-        /*Jeg legger til en onclick på "regnUt" som ligger på knappen du trykker
-        for å regne ut karakteren. Jeg gir den også verdien kalkuler, som
-        er en funksjon som skal regne ut karakteren.
-        På denne måten skal den regne ut karakteren hver gang du trykker på knappen.*/
-        document.getElementById("regnUt").onclick = kalkuler;
-
-        /*Funksjon som skal regne ut karakter hver gang vi trykker "Regn ut"
-        Inni funksjonen lager jeg variabelen "regnUt" og gir verdien er matteformelen for
-        å regne ut karakteren.*/
-        function kalkuler() {
-            let utregning = 0.3 * (poeng1 / 100 * 100) + (poeng2 / 100 * 100);
-            if(utregning > 25) {
-                document.getElementById("karakter") = "Karakter: " + grades[0]; + ".";
-            } else if (utregning > 44) {
-                document.getElementById("karakter") = "Karakter: " + grades[1]; + ".";
-            } else if (utregning > 68) {
-                document.getElementById("karakter") = "Karakter: " + grades[2]; + ".";
-            } else if (utregning > 88) {
-                document.getElementById("karakter") = "Karakter: " + grades[3]; + ".";
-            } else if (utregning > 100) {
-                document.getElementById("karakter") = "Karakter: " + grades[4]; + ".";
-            } else if (utregning = 100) {
-                document.getElementById("karakter") = "Karakter: " + grades[5]; + ".";
+        /*For å fortelle maskinen jeg ønsker den skal deaktivere "disabled", altså gjøre "Bereng Karakter" 
+        knappen mulig å trykke på, lager jeg en document.addEventListener med en if-test som skal se etter om du 
+        har skrevet inn i begge feltene. Jeg skriver i paranesene "keydown" slik at hver gang du trykker ned på
+        tastaturet vil addEvenetListene kjøre if-testen.*/
+        document.addEventListener("keydown", function(event) {
+        console.log(event)
+        /*Jeg ønsker å skjekke for begge feltene samtidig. Først skiver jeg poeng1.value som henter verdien til
+        poeng1 og sjekker om den er større enn 0. Så skriver det samme for poeng2 med && i mellom.
+        Nå vil knappen kun være tilgjenge om du har skrevet inn i begge feltene.
+        Er denne tilstanden møtt henter jeg "regnUt" knappen, jeg skriver .disabled for å peke på disabled, også endrer 
+        jeg den til false; slik at knappen blir klikkabar. Er ikke tilstanden møtt så forblir den true; altså ikke klikkbar*/
+        if(poeng1.value > 0 && poeng2.value > 0) {
+                    document.getElementById("regnUt").disabled = false;
+        } else {
+                    document.getElementById("regnUt").disabled = true;
             }
+        })
+
+        /*Jeg skriver selve funksjonen som skal regne ut karakteren.
+        Jeg henter knappen med id "regnUt" og legger på .onclick som jeg setter lik kalkuler, navnet på funksjonen. 
+        På den måten blir funksjonen kalt på og gjennomført hver gang du trykker på "regnUt" knappen.*/
+        document.getElementById("regnUt").onclick = kalkuler;
+        function kalkuler() {
+            /*Jeg lager poeng1 og poeng2 til en variabel. Denne variabelen kan endres verdi så jeg gjør dem til en 
+            let. Variabelene blir lik verdi som det som står i input-feltene ved å hente id-ene.*/
+            let poeng1 = document.getElementById("poeng1").value;
+            let poeng2 = document.getElementById("poeng2").value;
+
+            /*Formelen for å regne ut karakteren. Jeg legger den i en let utregning, og henter poeng1 
+            og poeng2 for å hente svarene som er skrevet og legge dem i regnestykket. */
+            let utregning = 0.3 * (poeng1 / 100 * 100) + ( 0.7 * (poeng2 / 100 * 100));
+            // (0.3 * (poeng1 / 100 * 100)) + (0.7 * (PoengOppgave2 / MaksimaltPoengOppgave2 * 100))
+
+            /*Jeg lager en variabelen "bokstav" og skriver = "". Verdien skal stå tom mellom fnuttene,
+            her skal karakter-bokstaven lagres.*/
+            let bokstav = ""
+
+            /*Regner vi ut svaret nå vil vi bare få en nummer, det vi ønsker er å gjøre den til en karakterbokstav.
+            For å gjøre dette laget jeg en if-test. Hvert else if skal gi hver sin karakter.
+            Jeg skriver "bokstav = grades[]" og i klammeparantesene skriver jeg indeksen fra karakterskalaen
+            som skal tilsvare karakteren, etterfulgt av .grade som spesifiserer hvor jeg henter fra. */
+            if(utregning >= 100) {
+                bokstav = grades[5].grade
+            } else if(utregning < 100 && utregning >= 88) {
+                bokstav = grades[4].grade
+            } else if(utregning < 88 && utregning >= 68) {
+                bokstav = grades[3].grade
+            } else if(utregning < 68 && utregning >= 44) {
+                bokstav = grades[2].grade
+            } else if(utregning < 44 && utregning >= 25) {
+                bokstav = grades[1].grade
+            } else if(utregning < 25) {
+                bokstav = grades[0].grade
+            }
+            /*Til slutt printer jeg ut karakteren med å hente <p>-taggen "karakter" jeg lagde tidligere, også skrive
+            er lik hva jeg skal printe ut. Jeg skriver tektsen melleom fnuttene og plusser på bokstav variabelen.*/
+            document.getElementById("karakter").innerHTML = "Karakter: " + bokstav;
+            /*consol.log for å kunne kontrollere resulatenen i konsollen.*/
+            console.log(karakter)
+            console.log(utregning)
         }
+
+        //Louise Østensen
     </script>
 </body>
 </html>
